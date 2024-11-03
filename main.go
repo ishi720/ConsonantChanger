@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"html/template"
 	"io"
+	"myapp/module"
 )
 
 // テンプレートの構造体
@@ -30,7 +31,7 @@ func main() {
 	// ルートハンドラを設定
 	e.GET("/", func(c echo.Context) error {
 		data := map[string]interface{}{
-			"Message": "Hello, Echo!",
+			"Message": module.ConsonantLockLanguage("こんにちは"),
 		}
 		return c.Render(http.StatusOK, "index.html", data)
 	})
