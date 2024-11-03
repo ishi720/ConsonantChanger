@@ -31,7 +31,7 @@ func main() {
 	// ルートハンドラを設定
 	e.GET("/", func(c echo.Context) error {
 		data := map[string]interface{}{
-			"Message": module.ConsonantLockLanguage("こんにちは"),
+			"Message": module.ConsonantLockLanguage("こんにちは", "pa"),
 		}
 		return c.Render(http.StatusOK, "index.html", data)
 	})
