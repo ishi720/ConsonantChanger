@@ -8,6 +8,11 @@ import (
 	"myapp/module"
 )
 
+// APIレスポンスの構造体
+type Response struct {
+	Result string `json:"result"`
+}
+
 // テンプレートの構造体
 type Template struct {
 	templates *template.Template
@@ -36,6 +41,18 @@ func main() {
 		return c.Render(http.StatusOK, "index.html", data)
 	})
 
-	// サーバーをポート8080で起動
+	// APIエンドポイントのルーティング（GETメソッド）
+	e.GET("/api/getColockLanguage", func(c echo.Context) error {
+		inputString := c.QueryParam("input_string")
+		lineType := c.QueryParam("line_type")
+
+		// 入力を処理して結果を取得
+		result := module.ConsonantLockLanguage(inputString, lineType)
+
+		// 結果をJSON形式で返す
+		return c.JSON(http.StatusOK, Response{Result: result})
+	})
+
+	// ポート8080でサーバーを起動
 	e.Start(":8080")
 }
