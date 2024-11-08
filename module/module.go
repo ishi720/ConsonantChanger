@@ -42,6 +42,19 @@ func StringToSlice(s string) []string {
 // Returns:
 //   - []string: ローマ字に変換されたスライス
 func HiraganaToRomaji(hiragana []string) []string {
+	var romaji []string
+	for _, char := range hiragana {
+		romaji = append(romaji, convertToRomaji(char))
+	}
+	return romaji
+}
+
+// 1つのひらがなをローマ字に変換
+// Parameters:
+//   - char: 変換対象のひらがな1文字。
+// Returns:
+//   - string: ローマ字に変換された文字列
+func convertToRomaji(char string) string {
 	romajiMap := map[string]string{
 		"あ": "a", "い": "i", "う": "u", "え": "e", "お": "o",
 		"か": "ka", "き": "ki", "く": "ku", "け": "ke", "こ": "ko",
@@ -60,17 +73,12 @@ func HiraganaToRomaji(hiragana []string) []string {
 		"ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po",
 	}
 
-	var romaji []string
-	for _, char := range hiragana {
-		if romajiChar, exists := romajiMap[char]; exists {
-			romaji = append(romaji, romajiChar)
-		} else {
-			romaji = append(romaji, char)
-		}
+	if romajiChar, exists := romajiMap[char]; exists {
+		return romajiChar
 	}
-
-	return romaji
+	return char
 }
+
 
 // スライス内の文字列から母音を取り出す
 // Parameters:
@@ -86,6 +94,21 @@ func ExtractVowels(strs []string) []string {
 		result = append(result, char)
 	}
 	return result
+}
+
+
+
+// 文字列を指定された行のひらがなに変換する
+// Parameters:
+//   - str: 変換対象の文字列
+//   - hiraganaMap: 変換に使用するひらがなマップ
+// Returns:
+//   - string: 変換後のひらがな文字列。一致しない場合は空文字列を返す。
+func ConvertToHiragana(str string, hiraganaMap map[string]string) string {
+	if hiraganaChar, exists := hiraganaMap[str]; exists {
+		return hiraganaChar
+	}
+	return ""
 }
 
 // スライス内の文字列をひらがなに変換する
@@ -123,11 +146,7 @@ func ConvertToHiraganaSlice(strs []string, lineType string) []string {
 	}
 
 	for _, s := range strs {
-		if hiraganaChar, exists := hiraganaMap[s]; exists {
-			result = append(result, hiraganaChar)
-		} else {
-			result = append(result, "") // マッチしない場合に空文字列を追加
-		}
+		result = append(result, ConvertToHiragana(s, hiraganaMap))
 	}
 	return result
 }
