@@ -2,22 +2,31 @@ package module
 
 import "strings"
 
-// 受け取った文字列をぱ行に変換
+// ひらがなを指定した母音の行に変換します。
+//
+// パラメータ:
+//   - inputString: string - 変換対象のひらがな文字列
+//   - lineType: string - 変換後の行の種類
+//
+// 戻り値:
+//   - string: 変換されたひらがな文字列
 func ConsonantLockLanguage(inputString string, lineType string) string {
 
-	// 1. 文字列を分割
+	// TODO: 1. 漢字をひらがなに変換
+
+	// 2. 文字列を分割
 	hiraganaCharacters := StringToSlice(inputString)
 
-	// 2. ローマ字に変換
+	// 3. ローマ字に変換
 	romajiCharacters := HiraganaToRomaji(hiraganaCharacters)
 
-	// 3. 母音だけ取り出し
+	// 4. 母音だけ取り出し
 	vowelCharacters := ExtractVowels(romajiCharacters)
 
-	// 4. 母音をもとにぱ行に変換
+	// 5. 母音をもとにぱ行に変換
 	paCharacters := ConvertToHiraganaSlice(vowelCharacters, lineType)
 
-	// 5. スライスの文字を結合
+	// 6. スライスの文字を結合
 	resultString := JoinStrings(paCharacters)
 
 	return resultString
