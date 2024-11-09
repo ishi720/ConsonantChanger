@@ -6,6 +6,58 @@
     <title>ConsonantLockLanguage</title>
 </head>
 <body>
-    <h1>{{.Message}}</h1>
+    <div>
+
+        <label for="input_string">入力文字列:</label>
+        <input type="text" id="input_string" />
+
+        <label for="line_type">変換行:</label>
+        <select id="line_type">
+            <option value="a">あ行</option>
+            <option value="ka">か行</option>
+            <option value="sa">さ行</option>
+            <option value="ta">た行</option>
+            <option value="na">な行</option>
+            <option value="ha">は行</option>
+            <option value="ma">ま行</option>
+            <option value="ya">や行</option>
+            <option value="ra">ら行</option>
+            <option value="ga">が行</option>
+            <option value="za">ざ行</option>
+            <option value="da">だ行</option>
+            <option value="ba">ば行</option>
+            <option value="pa">ぱ行</option>
+        </select>
+    </div>
+    <div>
+        <button onclick="convertButton()">変換</button>
+    </div>
+    <div id="result">
+    </div>
 </body>
 </html>
+<script>
+async function convertButton() {
+    const inputString = document.getElementById("input_string").value;
+    const lineType = document.getElementById("line_type").value;
+
+    try {
+        // APIリクエストのURLを作成
+        const response = await fetch(`/api/getColockLanguage?input_string=${encodeURIComponent(inputString)}&line_type=${encodeURIComponent(lineType)}`);
+        
+        // エラーチェック
+        if (!response.ok) {
+          throw new Error('APIリクエストに失敗しました');
+        }
+
+        // レスポンスをJSONとして解析
+        const data = await response.json();
+
+        // 結果を表示
+        document.getElementById("result").textContent = data.result;
+    } catch (error) {
+        console.error("エラー:", error);
+        document.getElementById("result").textContent = "エラーが発生しました";
+    }
+}
+</script>
