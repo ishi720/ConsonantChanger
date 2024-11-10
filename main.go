@@ -10,6 +10,8 @@ func main() {
 	// Echoインスタンスを作成
 	e := echo.New()
 
+	e.Static("/static", "static")
+
 	// Template構造体初期化し、HTMLテンプレートをロード
 	t := &handlers.Template{
 		Templates: template.Must(template.ParseGlob("views/*.html")),
