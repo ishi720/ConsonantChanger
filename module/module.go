@@ -23,11 +23,11 @@ func ConsonantLockLanguage(inputString string, lineType string) string {
 	// 4. 母音だけ取り出し
 	vowelCharacters := ExtractVowels(romajiCharacters)
 
-	// 5. 母音をもとにぱ行に変換
-	paCharacters := ConvertToHiraganaSlice(vowelCharacters, lineType)
+	// 5. 母音をもとに変換
+	lineCharacters := ConvertToHiraganaSlice(vowelCharacters, lineType)
 
 	// 6. スライスの文字を結合
-	resultString := JoinStrings(paCharacters)
+	resultString := JoinStrings(lineCharacters)
 
 	return resultString
 }
