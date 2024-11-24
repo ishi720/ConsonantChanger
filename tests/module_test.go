@@ -1,8 +1,8 @@
 package tests
 
 import (
-	"testing"
 	"myapp/module"
+	"testing"
 )
 
 func TestConsonantLockLanguage(t *testing.T) {
@@ -24,5 +24,11 @@ func TestConsonantLockLanguage(t *testing.T) {
 	expected3 := "ごがぐぎががぎ"
 	if result3 != expected3 {
 		t.Errorf("文字列が一致しません。Result=%s, Expected=%s", result3, expected3)
+	}
+
+	result4 := module.ConsonantLockLanguage("わたしは、おにぎりがたべたいです。", "mo")
+	expected4 := "ままみま、もみみみままめまみめむ。"
+	if result4 != expected4 {
+		t.Errorf("文字列が一致しません。Result=%s, Expected=%s", result4, expected4)
 	}
 }
