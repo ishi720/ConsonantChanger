@@ -21,13 +21,10 @@ jobs:
         run: go mod tidy
 
       - name: Run tests with coverage
-        run: |
-          go test ./... -coverprofile=coverage/coverage.out
-          sed -i 's|/home/runner/work/ConsonantLockLanguage/ConsonantLockLanguage/||' coverage/coverage.out
+        run: go test ./... -coverprofile=coverage/coverage.out -covermode=count
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: coverage/coverage.out
-          base-path: ${{ github.workspace }}
