@@ -1,6 +1,8 @@
 package module
 
-import "strings"
+import (
+	"strings"
+)
 
 // ひらがなを指定した母音の行に変換します。
 //
@@ -35,6 +37,7 @@ func ConsonantLockLanguage(inputString string, lineType string) string {
 // 文字列を一文字ずつ分解してスライスを返す関数
 // Parameters:
 //   - s: 分解対象の文字列。
+//
 // Returns:
 //   - []string: 各文字が1要素として格納されたスライス。
 func StringToSlice(s string) []string {
@@ -48,6 +51,7 @@ func StringToSlice(s string) []string {
 // ひらがなをローマ字に変換
 // Parameters:
 //   - s: 変換対象の文字列スライス。
+//
 // Returns:
 //   - []string: ローマ字に変換されたスライス
 func HiraganaToRomaji(hiragana []string) []string {
@@ -61,6 +65,7 @@ func HiraganaToRomaji(hiragana []string) []string {
 // 1つのひらがなをローマ字に変換
 // Parameters:
 //   - char: 変換対象のひらがな1文字。
+//
 // Returns:
 //   - string: ローマ字に変換された文字列
 func convertToRomaji(char string) string {
@@ -88,42 +93,55 @@ func convertToRomaji(char string) string {
 	return char
 }
 
-
 // スライス内の文字列から母音を取り出す
 // Parameters:
 //   - strs: 変換対象の文字列スライス。
+//
 // Returns:
-//   - []string: 各文字列から抽出された母音のスライス
+//   - []string: 各文字列から抽出された母音のスライス、一致しない場合は文字列
 func ExtractVowels(strs []string) []string {
 	var result []string
+	vowels := "aiueon"
 
 	for _, s := range strs {
-		var char string
-		char = string(s[len(s)-1])
-		result = append(result, char)
+		// 最後の文字を取得
+		char := string(s[len(s)-1])
+
+		// 最後の文字が母音であればそれを追加、そうでなければ元の文字列を追加
+		if strings.Contains(vowels, char) {
+			result = append(result, char)
+		} else {
+			result = append(result, s)
+		}
 	}
 	return result
 }
-
-
 
 // 文字列を指定された行のひらがなに変換する
 // Parameters:
 //   - str: 変換対象の文字列
 //   - hiraganaMap: 変換に使用するひらがなマップ
+//
 // Returns:
-//   - string: 変換後のひらがな文字列。一致しない場合は空文字列を返す。
+//   - string: 変換後のひらがな文字列。一致しない場合は元の文字列を返す。
 func ConvertToHiragana(str string, hiraganaMap map[string]string) string {
-	if hiraganaChar, exists := hiraganaMap[str]; exists {
-		return hiraganaChar
+	if len(str) == 0 {
+		return str
 	}
-	return ""
+	char := string(str[len(str)-1])
+
+	// マッピングが存在する場合は変換、そうでなければ元の文字列を返す
+	if converted, found := hiraganaMap[char]; found {
+		return converted
+	}
+	return str
 }
 
 // スライス内の文字列をひらがなに変換する
 // Parameters:
 //   - strs: 変換対象の文字列スライス。
 //   - lineType: ひらがなの行。
+//
 // Returns:
 //   - []string: 各文字がひらがなに変換されたスライス。一致する行がなければ空で返す。
 func ConvertToHiraganaSlice(strs []string, lineType string) []string {
@@ -163,6 +181,7 @@ func ConvertToHiraganaSlice(strs []string, lineType string) []string {
 // 文字列のスライスを結合して1つの文字列を返す関数
 // Parameters:
 //   - strs: 結合する文字列のスライス
+//
 // Returns:
 //   - string: 結合された文字列
 func JoinStrings(strs []string) string {
