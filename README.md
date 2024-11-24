@@ -10,6 +10,11 @@
 |ありがとう|さ行|さしさそす|
 |おやすみなさい|が行|ごがぐぎががぎ|
 
+# バッジ
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d1521be9f754dc68f2e198a3d60ad1b)](https://app.codacy.com/gh/ishi720/ConsonantLockLanguage/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
+
 # 環境
 
 - Go: 1.23.2
