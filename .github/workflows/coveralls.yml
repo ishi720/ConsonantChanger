@@ -23,7 +23,7 @@ jobs:
       - name: Run tests with coverage
         run: |
           go test ./... -coverprofile=coverage/coverage.out
-          sed -i 's|myapp/||g' coverage/coverage.out
+          sed -i 's|/home/runner/work/ConsonantLockLanguage/ConsonantLockLanguage/||' coverage/coverage.out
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2.0.0
