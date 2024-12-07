@@ -31,4 +31,10 @@ func TestConsonantLockLanguage(t *testing.T) {
 	if result4 != expected4 {
 		t.Errorf("文字列が一致しません。Result=%s, Expected=%s", result4, expected4)
 	}
+
+	result5 := module.ConsonantLockLanguage("こっぺぱん", "ya")
+	expected5 := "よっえやん"
+	if result5 != expected5 {
+		t.Errorf("文字列が一致しません。Result=%s, Expected=%s", result5, expected5)
+	}
 }
