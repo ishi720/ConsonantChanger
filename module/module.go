@@ -2,6 +2,7 @@ package module
 
 import (
 	"strings"
+	"unicode"
 )
 
 // ひらがなを指定した母音の行に変換します。
@@ -16,22 +17,43 @@ func ConsonantLockLanguage(inputString string, lineType string) string {
 
 	// TODO: 1. 漢字をひらがなに変換
 
-	// 2. 文字列を分割
-	hiraganaCharacters := StringToSlice(inputString)
+	// 2. カタカナをひらがなに変換
+	hiraganaString := KatakanaToHiragana(inputString)
 
-	// 3. ローマ字に変換
+	// 3. 文字列を分割
+	hiraganaCharacters := StringToSlice(hiraganaString)
+
+	// 4. ローマ字に変換
 	romajiCharacters := HiraganaToRomaji(hiraganaCharacters)
 
-	// 4. 母音だけ取り出し
+	// 5. 母音だけ取り出し
 	vowelCharacters := ExtractVowels(romajiCharacters)
 
-	// 5. 母音をもとに変換
+	// 6. 母音をもとに変換
 	lineCharacters := ConvertToHiraganaSlice(vowelCharacters, lineType)
 
-	// 6. スライスの文字を結合
+	// 7. スライスの文字を結合
 	resultString := JoinStrings(lineCharacters)
 
 	return resultString
+}
+
+// カタカナをひらがなに変換
+// Parameters:
+//   - s: 変換対象の文字列
+//
+// Returns:
+//   - []string: ひらがなに変換された文字列
+func KatakanaToHiragana(s string) string {
+	var result strings.Builder
+	for _, r := range s {
+		// カタカナの場合、ユニコード上でひらがなへ変換
+		if unicode.In(r, unicode.Katakana) {
+			r = r - 0x60
+		}
+		result.WriteRune(r)
+	}
+	return result.String()
 }
 
 // 文字列を一文字ずつ分解してスライスを返す関数
