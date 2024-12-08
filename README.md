@@ -13,7 +13,7 @@
 # バッジ
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0d1521be9f754dc68f2e198a3d60ad1b)](https://app.codacy.com/gh/ishi720/ConsonantLockLanguage/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-
+[![Coverage Status](https://coveralls.io/repos/github/ishi720/ConsonantLockLanguage/badge.svg?branch=main)](https://coveralls.io/github/ishi720/ConsonantLockLanguage?branch=main)
 
 # 環境
 
