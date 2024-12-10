@@ -1,11 +1,12 @@
 package handlers
 
 import (
-	"net/http"
-	"github.com/labstack/echo/v4"
 	"html/template"
 	"io"
 	"myapp/module"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
 // APIレスポンスの構造体
@@ -25,10 +26,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 // ルートハンドラ
 func RootHandler(c echo.Context) error {
-	data := map[string]interface{}{
-		"Message": module.ConsonantLockLanguage("こんにちは", "pa"),
-	}
-	return c.Render(http.StatusOK, "index.html", data)
+	return c.Render(http.StatusOK, "index.html", nil)
 }
 
 // APIエンドポイントのハンドラ
