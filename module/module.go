@@ -1,27 +1,42 @@
 package module
 
 import (
+	"context"
+	"fmt"
+	"log"
+	"os"
 	"strings"
 	"unicode"
+
+	"github.com/google/generative-ai-go/genai"
+	"github.com/joho/godotenv"
+	"google.golang.org/api/option"
 )
 
 // ひらがなを指定した母音の行に変換します。
 //
-// パラメータ:
+// Parameters:
 //   - inputString: string - 変換対象のひらがな文字列
 //   - lineType: string - 変換後の行の種類
 //
 // 戻り値:
 //   - string: 変換されたひらがな文字列
-func ConsonantLockLanguage(inputString string, lineType string) string {
+func ConsonantLockLanguage(inputString string, lineType string, isGemini bool) string {
 
-	// TODO: 1. 漢字をひらがなに変換
+	var hiraganaString string
+
+	// 1. 漢字をひらがなに変換
+	if isGemini {
+		hiraganaString = KanjiToHiragana(inputString)
+	} else {
+		hiraganaString = inputString
+	}
 
 	// 2. カタカナをひらがなに変換
-	hiraganaString := KatakanaToHiragana(inputString)
+	hiraganaString2 := KatakanaToHiragana(hiraganaString)
 
 	// 3. 文字列を分割
-	hiraganaCharacters := StringToSlice(hiraganaString)
+	hiraganaCharacters := StringToSlice(hiraganaString2)
 
 	// 4. ローマ字に変換
 	romajiCharacters := HiraganaToRomaji(hiraganaCharacters)
@@ -36,6 +51,50 @@ func ConsonantLockLanguage(inputString string, lineType string) string {
 	resultString := JoinStrings(lineCharacters)
 
 	return resultString
+}
+
+// Gemini APIを使用し、文章のひらがな変換
+//
+// Parameters:
+//   - text: string - 変換対象の文字列
+//
+// Returns:
+//   - string: 変換された文字列
+func KanjiToHiragana(text string) string {
+
+	// .envファイルを読み込む
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+	ctx := context.Background()
+
+	// Gemini APIクライアントを作成する
+	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("GEMINI_APIKEY")))
+	if err != nil {
+		log.Fatalf("Gemini API call failed: %v", err)
+	}
+	defer client.Close()
+
+	// モデルとプロンプトの準備
+	model := client.GenerativeModel(os.Getenv("GEMINI_MODEL"))
+	prompt := genai.Text("括弧に囲まれた部分をひらがなに変換してください。括弧不要です。: (" + text + ")")
+	resp, err := model.GenerateContent(ctx, prompt)
+	if err != nil {
+		log.Fatalf("Gemini API call failed: %v", err)
+	}
+
+	result := ""
+	for _, part := range resp.Candidates[0].Content.Parts {
+		_text, ok := part.(genai.Text)
+		if !ok {
+			continue
+		}
+		str := string(_text)
+
+		result += str
+	}
+	return result
 }
 
 // カタカナをひらがなに変換

@@ -35,7 +35,7 @@ func GetColockLanguageHandler(c echo.Context) error {
 	lineType := c.QueryParam("line_type")
 
 	// 入力を処理して結果を取得
-	result := module.ConsonantLockLanguage(inputString, lineType)
+	result := module.ConsonantLockLanguage(inputString, lineType, false)
 
 	// 結果をJSON形式で返す
 	return c.JSON(http.StatusOK, Response{Result: result})
