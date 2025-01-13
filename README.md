@@ -6,7 +6,7 @@
 
 |変換前|変換内容|変換後|
 |-|-|-|
-|こんにちは|ぱ行|ぽんぴぴぱ|  
+|こんにちは|ぱ行|ぽんぴぴぱ|
 |ありがとう|さ行|さしさそす|
 |おやすみなさい|が行|ごがぐぎががぎ|
 
@@ -42,6 +42,12 @@ $ go run main.go
 - ブラウザで確認
 
 http://localhost:8080/
-  
 
 
+
+# Docker起動
+
+```bash
+$ docker build -t consonant_lock_language .
+$ docker run -p 8080:8080 consonant_lock_language
+```
