@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consonant Lock Language</title>
+    <title>子音チェンジャー</title>
 
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
@@ -23,8 +23,12 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h4 {
+            user-select: none;
             text-align: center;
             color: #00796b;
+        }
+        rt {
+            color: gray;
         }
         .input-field label {
             font-weight: bold;
@@ -47,7 +51,10 @@
 </head>
 <body>
     <div class="container">
-        <h4>Consonant Lock Language</h4>
+        <h4>
+            <ruby>子音チェンジャー<rt>ぴぴんぴぇんぴゃー</rt></ruby>
+        </h4>
+        
         
         <div class="input-field">
             <textarea type="text" id="input_string" class="validate" placeholder="変換したい文字を入力"></textarea>
