@@ -9,6 +9,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 
     <script src="/static/js/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reggae+One&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -23,12 +26,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h4 {
-            user-select: none;
             text-align: center;
-            color: #00796b;
+            color: crimson;
+            font-family: "Reggae One", serif;
+            font-weight: 400;
+            font-style: normal;
         }
         rt {
             color: gray;
+            user-select: none;
         }
         .input-field label {
             font-weight: bold;
@@ -36,9 +42,9 @@
         .btn {
             width: 100%;
             margin-top: 20px;
+            background-color: crimson !important;
         }
         textarea {
-            margin-top: 20px;
             width: 100%;
             height: 150px;
             padding: 10px;
@@ -46,6 +52,23 @@
             border: 1px solid #ddd;
             font-size: 14px;
             resize: none;
+        }
+        .dropdown-content li>span {
+            color: crimson;
+        }
+        .select-wrapper input.select-dropdown:focus {
+            border-bottom: 1px solid crimson;
+        }
+
+        textarea:focus-visible {
+            outline: 0px;
+        }
+
+        p {
+            font-family: "Reggae One", serif;
+            font-weight: 400;
+            font-style: normal;
+            text-align: center;
         }
     </style>
 </head>
@@ -55,32 +78,39 @@
             <ruby>子音チェンジャー<rt>ぴぴんぴぇんぴゃー</rt></ruby>
         </h4>
         
+
+        <p>
+            日本語のテキストを特定のルールに基づいて変換するサービスです。<br>
+            「こんにちは」を「ぱ行」変換すると...
+        </p>
         
         <div class="input-field">
             <textarea type="text" id="input_string" class="validate" placeholder="変換したい文字を入力"></textarea>
         </div>
 
-        <div class="input-field">
-            <select id="line_type">
-                <option value="a">あ行</option>
-                <option value="ka">か行</option>
-                <option value="sa">さ行</option>
-                <option value="ta">た行</option>
-                <option value="na">な行</option>
-                <option value="ha">は行</option>
-                <option value="ma">ま行</option>
-                <option value="ya">や行</option>
-                <option value="ra">ら行</option>
-                <option value="ga">が行</option>
-                <option value="za">ざ行</option>
-                <option value="da">だ行</option>
-                <option value="ba">ば行</option>
-                <option value="pa">ぱ行</option>
-            </select>
+        <div class="row">
+            <div class="input-field col s12 m4">
+                <select id="line_type">
+                    <option value="a">あ行</option>
+                    <option value="ka">か行</option>
+                    <option value="sa">さ行</option>
+                    <option value="ta">た行</option>
+                    <option value="na">な行</option>
+                    <option value="ha">は行</option>
+                    <option value="ma">ま行</option>
+                    <option value="ya">や行</option>
+                    <option value="ra">ら行</option>
+                    <option value="ga">が行</option>
+                    <option value="za">ざ行</option>
+                    <option value="da">だ行</option>
+                    <option value="ba">ば行</option>
+                    <option value="pa">ぱ行</option>
+                </select>
+            </div>
+            <div class="col s12 m8">
+                <button class="btn waves-effect waves-light" onclick="convertButton()">変換</button>
+            </div>
         </div>
-
-        <button class="btn waves-effect waves-light" onclick="convertButton()">変換</button>
-
         <textarea id="result" class="section" placeholder="変換結果がここに表示されます..."></textarea>
     </div>
 
