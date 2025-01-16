@@ -24,7 +24,7 @@
 - リポジトリのクローン
 
 ```bash
-$ git clone git@github.com:ishi720/ConsonantLockLanguage.git
+$ git clone git@github.com:ishi720/ConsonantChanger.git
 ```
 
 - モジュールのダウンロード
