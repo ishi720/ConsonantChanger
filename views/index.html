@@ -51,7 +51,7 @@
                 </select>
             </div>
             <div class="col s12 m8">
-                <button class="btn waves-effect waves-light" onclick="convertButton()">変換</button>
+                <button id="convert_btn" class="btn waves-effect waves-light disabled" onclick="convertButton()">変換</button>
             </div>
         </div>
         <textarea id="result" class="section" placeholder="変換結果がここに表示されます..."></textarea>
@@ -64,6 +64,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('select');
             var instances = M.FormSelect.init(elems);
+        });
+
+        var inputString = document.getElementById("input_string");
+        inputString.addEventListener("input", function() {
+            document.getElementById("convert_btn").classList.toggle("disabled", inputString.value.length === 0);
         });
     </script>
 </body>
