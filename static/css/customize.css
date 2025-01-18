@@ -28,6 +28,13 @@ rt {
     margin-top: 20px;
     background-color: crimson !important;
 }
+.btn.disabled {
+    background-color: #ffbdbd !important;
+    color: #fff !important;
+}
+
+
+
 textarea {
     width: 100%;
     height: 150px;
