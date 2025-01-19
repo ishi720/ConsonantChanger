@@ -14,6 +14,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Reggae+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/customize.css">
+
+    <style>
+        .textarea-container {
+            position: relative;
+            width: 100%;
+        }
+
+        #result {
+            width: 100%;
+            padding-right: 50px;
+        }
+
+        #copyButton {
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container">
@@ -54,8 +74,12 @@
                 <button id="convert_btn" class="btn waves-effect waves-light disabled" onclick="convertButton()">変換</button>
             </div>
         </div>
-        <textarea id="result" class="section" placeholder="変換結果がここに表示されます..." readonly></textarea>
+        <div class="textarea-container">
+            <textarea id="result" class="section" placeholder="変換結果がここに表示されます..." readonly></textarea>
+            <a hidden id="copyButton">コピー</a>
+        </div>
     </div>
+
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -66,9 +90,31 @@
             var instances = M.FormSelect.init(elems);
         });
 
+        // 入力時に変換ボタンの有効化
         var inputString = document.getElementById("input_string");
         inputString.addEventListener("input", function() {
             document.getElementById("convert_btn").classList.toggle("disabled", inputString.value.length === 0);
+        });
+
+        // 変換ボタンのイベント
+        var convert_btn = document.getElementById("convert_btn");
+        var outputString = document.getElementById("result");
+        convert_btn.addEventListener("click", function() {
+            setTimeout(function() {
+                document.getElementById('copyButton').removeAttribute('hidden');
+            }, 500);
+        });
+
+        // コピーボタンのイベント
+        document.getElementById('copyButton').addEventListener('click', () => {
+            let textContent = document.getElementById("result").value;
+            navigator.clipboard.writeText(textContent)
+                .then(() => {
+                    console.log('クリップボードにコピーしました:', textContent);
+                })
+                .catch(err => {
+                    console.error('コピーに失敗しました:', err);
+                });
         });
     </script>
 </body>
