@@ -8,15 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("convert_btn").classList.toggle("disabled", inputString.value.length === 0);
     });
 
-    // 変換ボタンのイベント
-    var convert_btn = document.getElementById("convert_btn");
-    var outputString = document.getElementById("result");
-    convert_btn.addEventListener("click", function() {
-        setTimeout(function() {
-            document.getElementById('copyButton').removeAttribute('hidden');
-        }, 500);
-    });
-
     // コピーボタンのイベント
     document.getElementById('copyButton').addEventListener('click', () => {
         let textContent = document.getElementById("result").value;
@@ -48,6 +39,9 @@ async function convertButton() {
 
         // 結果を表示
         document.getElementById("result").textContent = data.result;
+
+        // コピーボタンを有効か
+        document.getElementById('copyButton').removeAttribute('hidden');
     } catch (error) {
         console.error("エラー:", error);
         document.getElementById("result").textContent = "エラーが発生しました";
