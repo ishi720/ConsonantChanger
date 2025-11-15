@@ -1,3 +1,5 @@
 {
+    "editor.renderWhitespace": "all",
     "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "window.title":"${dirty}${activeEditorMedium}${separator}${rootName}"
 }

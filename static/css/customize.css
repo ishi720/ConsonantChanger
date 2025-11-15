@@ -70,11 +70,21 @@ p {
 #result {
     width: 100%;
     padding-right: 50px;
+    margin-bottom: 10px;
 }
 
-#copyButton {
-    position: absolute;
-    cursor: pointer;
-    top: 10px;
-    right: 10px;
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.button-container .btn-small {
+    margin: 0;
+}
+
+.button-container .btn-small.disabled {
+    background-color: #cccccc !important;
+    color: #666 !important;
 }

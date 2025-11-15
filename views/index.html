@@ -8,6 +8,8 @@
 
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="/static/js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +57,14 @@
         </div>
         <div class="textarea-container">
             <textarea id="result" class="section" placeholder="変換結果がここに表示されます..." readonly></textarea>
-            <a hidden id="copyButton">コピー</a>
+            <div class="button-container">
+                <a hidden id="copyButton" class="waves-effect waves-light btn-small">
+                    <i class="material-icons left">content_copy</i>コピー
+                </a>
+                <a hidden id="playButton" class="waves-effect waves-light btn-small green">
+                    <i class="material-icons left">volume_up</i>音声再生
+                </a>
+            </div>
         </div>
     </div>
 
