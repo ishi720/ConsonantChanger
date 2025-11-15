@@ -1,0 +1,49 @@
+# Git関連
+.git
+.gitignore
+
+# ビルド成果物
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+main
+
+# カバレッジ
+coverage/
+
+# 依存関係（go mod downloadで取得するため）
+# vendor/
+
+# 環境設定
+.env
+.env.local
+
+# IDE設定
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS固有
+.DS_Store
+Thumbs.db
+
+# ドキュメント
+README.md
+*.md
+
+# Docker関連
+docker-compose.yml
+Dockerfile
+
+# テスト関連
+tests/
+
+# その他
+node_modules/
+backup/

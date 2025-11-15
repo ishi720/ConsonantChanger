@@ -19,5 +19,8 @@ RUN go build -o main .
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
+# 環境変数のデフォルト値
+ENV VOICEVOX_URL=http://voicevox:50021
+
 # Command to run the executable
 CMD ["./main"]

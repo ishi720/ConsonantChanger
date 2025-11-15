@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # VOICEVOXエンジン
+  voicevox:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    container_name: voicevox_engine
+    ports:
+      - "50021:50021"
+    environment:
+      - VOICEVOX_CORS_POLICY_MODE=all
+    networks:
+      - app-network
+
+  # 子音チェンジャーアプリケーション
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: consonant_changer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - voicevox
+    environment:
+      - VOICEVOX_URL=http://voicevox:50021
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
