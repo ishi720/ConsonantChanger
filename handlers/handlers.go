@@ -211,3 +211,11 @@ func GenerateVoiceHandler(c echo.Context) error {
 	c.Response().Header().Set("Content-Disposition", "inline; filename=zundamon.wav")
 	return c.Blob(http.StatusOK, "audio/wav", audioData)
 }
+
+func getKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	return keys
+}
